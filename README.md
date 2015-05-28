@@ -231,16 +231,15 @@ the case...this time...I haven't gotten to that yet :-).  So open
 and delete everything there for the Yun.
 Then try ssh again and confirm "yes" that you want to log into the 
 now unknown host.  Then run
-
 	`uname -a`
-
 with the expected result:
 
 	`Linux Arduino 3.3.8 #1 Fri Nov 14 08:57:34 CET 2014 mips GNU/Linux`
 
-Then had to set the clock back to the right time with
+Then had to set the clock back to the right time with `date --set`.
 
-	`date --set`
+####Get GCC compiling on Yun
+
 
 
 	
