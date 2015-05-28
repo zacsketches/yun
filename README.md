@@ -208,30 +208,45 @@ is documented on the forum and some of it assumes various levels of
 experience with linux and OpenWRT.  So I'm going to record my path here from
 switching it on for the first time all the way through compiling a custom
 library for libzmq.
-	Step one...when I powered the yun on by plugging a micro-USB into the jack
+  1. When I powered the yun on by plugging a micro-USB into the jack
 it lit up.
-	Step two...verify the firmware is the latest build.  I used the command
-		uname -a 
-	and saw that the firmware upgrade was from April 2014.  The newest
-	image off the the change page is Nov 2014.
-		https://github.com/arduino/openwrt-yun/blob/master/ChangeLog
-	So I downloaded the new image and then had to move it to the SD card
-		scp /openwrt.newest.edition root@yun:/mnt/sda1
-	Then
-		run-sysupgrade /mnt/sda1/openwrt...
-	Because the system changes the RSA key with the new software the next time
-	you ssh in after the upload I was locked out and warned by ssh running 
-	on OS X that I may be the target of a man-in-the-middle attack.  This is not
-	the case...this time...I haven't gotten to that yet :-).  So open 
-	/Users/username/.ssh/known_hosts and delete everything there for the Yun.
-	Then try ssh again and confirm "yes" that you want to log into the 
-	now unknown host.  Then run
-		uname -a
-	with the expected result:
-		Linux Arduino 3.3.8 #1 Fri Nov 14 08:57:34 CET 2014 mips GNU/Linux
-	Then had to set the clock back to the right time with
-		date --set
-		
+  2. verify the firmware is the latest build.  I used the command
+
+  	`uname -a` 
+
+and saw that the firmware upgrade was from April 2014.  The newest
+image off the the change page is Nov 2014.
+
+	https://github.com/arduino/openwrt-yun/blob/master/ChangeLog
+So I downloaded the new image and then had to move it to the SD card
+
+	`scp /openwrt.newest.edition root@yun:/mnt/sda1`
+
+Then
+
+	`run-sysupgrade /mnt/sda1/openwrt`
+
+Because the system changes the RSA key with the new software the next time
+you ssh in after the upload I was locked out and warned by ssh running 
+on OS X that I may be the target of a man-in-the-middle attack.  This is not
+the case...this time...I haven't gotten to that yet :-).  So open 
+
+	`/Users/username/.ssh/known_hosts` 
+
+and delete everything there for the Yun.
+Then try ssh again and confirm "yes" that you want to log into the 
+now unknown host.  Then run
+
+	`uname -a`
+
+with the expected result:
+
+	`Linux Arduino 3.3.8 #1 Fri Nov 14 08:57:34 CET 2014 mips GNU/Linux`
+
+Then had to set the clock back to the right time with
+
+	`date --set`
+
 
 	
 
