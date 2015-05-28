@@ -200,10 +200,10 @@ Steps:
 	3. Build libzmq - follow inst here http://zeromq.org/intro:get-the-software
 	
 -------------------------
-27 May
+##27 May
 
-Yun - 
-	I've got my Yun hooked up and I'm learning some quick lessons.  Some of this
+#Yun  
+I've got my Yun hooked up and I'm learning some quick lessons.  Some of this
 is documented on the forum and some of it assumes various levels of 
 experience with linux and OpenWRT.  So I'm going to record my path here from
 switching it on for the first time all the way through compiling a custom
