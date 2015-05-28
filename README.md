@@ -199,26 +199,21 @@ Steps:
 	2. Install gcc
 	3. Build libzmq - follow inst here http://zeromq.org/intro:get-the-software
 	
--------------------------
 ##27 May
-
-#Yun  
+###Yun  
 I've got my Yun hooked up and I'm learning some quick lessons.  Some of this
 is documented on the forum and some of it assumes various levels of 
 experience with linux and OpenWRT.  So I'm going to record my path here from
 switching it on for the first time all the way through compiling a custom
 library for libzmq.
-  1. When I powered the yun on by plugging a micro-USB into the jack
-it lit up.
-  2. verify the firmware is the latest build.  I used the command
+####Power up
+First things first. When I powered the yun on by plugging a micro-USB into the jack it lit up.
+####Firmware
+Next the [forum](http://forum.arduino.cc/index.php?board=93.0) indicates that the very first thing a new user should do is verify their firmware is the latest build.  I used the command
 
   	`uname -a` 
 
-and saw that the firmware upgrade was from April 2014.  The newest
-image off the the change page is Nov 2014.
-
-	https://github.com/arduino/openwrt-yun/blob/master/ChangeLog
-So I downloaded the new image and then had to move it to the SD card
+and saw that the firmware upgrade was from April 2014.  The newest image off the the [change page](https://github.com/arduino/openwrt-yun/blob/master/ChangeLog) is Nov 2014. So I downloaded the new image and then had to move it to the SD card
 
 	`scp /openwrt.newest.edition root@yun:/mnt/sda1`
 
