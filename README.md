@@ -238,8 +238,16 @@ with the expected result:
 
 Then had to set the clock back to the right time with `date --set`.
 
-####Get GCC compiling on Yun
+##27 May
+###Yun Continued
 
+####Get GCC compiling on Yun
+This was a learning curve.  Had to expand the root file system with the e2fsprogs package.  I used the sketch from the arduino site, but the openwrt site and the forum have some good insight on the way to do it manually.
+Next I've got to get this stuff working.
+
+	http://forum.arduino.cc/index.php?topic=266549.15
+
+	http://forum.arduino.cc/index.php?topic=266549.15
 
 
 	
