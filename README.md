@@ -387,3 +387,5 @@ and found that `libstdcpp` was not installed, but when I tried
  But in order to try and do it right, I need to figure out how to 
  rebuild Yun-GCC with the `--enable-libstdcxx-time`
  
+####LibZMQ
+I need to try this [link](https://walkerlindley.wordpress.com/2014/03/12/arduino-yun-and-git/) to get the source code onto the Yun.
