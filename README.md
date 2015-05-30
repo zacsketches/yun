@@ -252,7 +252,9 @@ Next I want to get this stuff working.
 ##29 May
 ###Yun Continued
 
-####I did not understand the disk partition stuff that I did yesterday so i read a little more about e2fprogs and the ext2 filesystem.  This site on mounting and unmounting devices was useful.
+####File system
+
+I did not understand the disk partition stuff that I did yesterday so i read a little more about e2fprogs and the ext2 filesystem.  This site on mounting and unmounting devices was useful.
 
 	http://www.thegeekstuff.com/2013/01/mount-umount-examples/
 
