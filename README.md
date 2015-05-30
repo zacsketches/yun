@@ -259,7 +259,7 @@ I did not understand the disk partition stuff that I did yesterday so i read a l
 	http://www.thegeekstuff.com/2013/01/mount-umount-examples/
 
 ##30 May
-###Max/Unix Admin
+###Mac-Unix Admin
 ####Launch Control
 
 In my effort to bounce back and forth between 0MQ, Yun and better OS X / Linux sysadmin
@@ -298,3 +298,84 @@ file and inspecting the text version via `cat *.plist` in the terminal window:
 ```
 <h6>Voila!</h6> <p>This launches a Terminal window when I log in as desired.</p>
 
+###Yun
+####C++11 
+I like the concurrency in C++11 for ZeroMQ so I want to try and get c++11 compiling
+on the Yun.  My first attempt was a simple program to test basic c++11 
+functions.
+```
+//
+// Test c++11 on yun
+//
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	vector<int> vi;
+	vi.push_back(3);
+	vi.push_back(5);
+	vi.push_back(7);
+	
+	for(auto x : vi) {
+		cout<<"The value is: "<<x<<endl;
+	}	
+}
+```
+Compile with `g++ -std=c++0x hw_11.cpp -o hello_11` and get expected results:
+```
+root@Arduino:~/test_c# ./hello_11
+The value is: 3
+The value is: 5
+The value is: 7
+```
+Moving on to this program that uses the <thread> and <chrono> library was
+not as easy.
+```
+//
+// sleep_11.cpp
+// Test c++11 on yun with some of the more recent libraries
+//
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <thread>
+
+using namespace std;
+
+int main() {
+	vector<int> vi;
+	vi.push_back(3);
+	vi.push_back(5);
+	vi.push_back(7);
+	
+	for(auto x : vi) {
+		cout<<"The value is: "<<x<<endl;
+		this_thread::sleep_for(chrono::seconds(1));
+	}	
+}
+```
+Compiling with `g++ -std=c++0x sleep_11.cpp  -o sleep` give the error:
+```
+sleep_11.cpp: In function 'int main()':
+sleep_11.cpp:20:3: error: 'sleep_for' is not a member of 'std::this_thread'
+```
+I'm thinking this is a library error.  So I tried
+```
+root@Arduino:~/test_c# g++ -print-libgcc-file-name
+/usr/bin/../lib/gcc/mips-openwrt-linux-uclibc/4.6.2/libgcc.a
+```
+So the default library for c++ compilation is the uclibc library.  My 
+guess is that the uclibc library doesn't contain the full set
+of facilities for concurrency.  So I used `opkg list-installed | grep libstdcpp`
+and found that `libstdcpp` was not installed, but when I tried
+`opkg install libstdcpp` I got the following errors:
+```
+ * check_data_file_clashes: Package libstdcpp wants to install file /usr/lib/libstdc++.so.6.0.16-gdb.py
+	But that file is already provided by package  * yun-gcc
+ * check_data_file_clashes: Package libstdcpp wants to install file /usr/lib/libstdc++.so.6.0.16
+ * opkg_install_cmd: Cannot install package libstdcpp.
+ ```
+ So I've got to figure out how to link against the correct library.
+ 
