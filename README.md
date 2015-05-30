@@ -258,6 +258,43 @@ I did not understand the disk partition stuff that I did yesterday so i read a l
 
 	http://www.thegeekstuff.com/2013/01/mount-umount-examples/
 
+##30 May
+###Max/Unix Admin
+####Launch Control
 
-	
+In my effort to bounce back and forth between 0MQ, Yun and better OS X / Linux sysadmin
+skills I spent some time today learning how OS X uses the `launchctl` program to 
+manage the launch daemon.  This process deprecates `cron` for OS X.  
+
+My use case is just launching a terminal window when I log in as my development user.
+I started by reading this link on [launchd](http://alvinalexander.com/mac-os-x/mac-osx-startup-crontab-launchd-jobs).
+
+Then I read `man launchctl`, `man launchd`, and `man launchd.plist`.
+
+At this point I felt pretty confident to write a .plist file to launch the
+Terminal application and store this .plist file in the 
+`~/Library/LaunchAgents/` directory.
+
+To actually write the .plist XML file I chose not to open a text editor and 
+go at it manually.  Instead I used XCode and created a File->New..
+Then look for OS X->Resource->Property List.  This will open an XCode tool
+to add tags to a preformatted file and save a lot of typing and potential 
+formatting errors in the XML syntax.  From the documentation I knew I needed
+the `Label` tag, the `Program` tag and the `RunOnLoad` tag.  After saving this
+file and inspecting the text version via `cat *.plist` in the terminal window:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>zac.example.appload</string>
+	<key>Program</key>
+	<string>/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal</string>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>
+```
+<h6>Voila!</h6> <p>This launches a Terminal window when I log in as desired.</p>
 
