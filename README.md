@@ -377,5 +377,13 @@ and found that `libstdcpp` was not installed, but when I tried
  * check_data_file_clashes: Package libstdcpp wants to install file /usr/lib/libstdc++.so.6.0.16
  * opkg_install_cmd: Cannot install package libstdcpp.
  ```
- So I've got to figure out how to link against the correct library.
+ Just figured out I'm barking up the wrong tree.  From this link on 
+ [stackoverflow](http://stackoverflow.com/questions/12523122/what-is-glibcxx-use-nanosleep-all-about) its pretty clear that the issue is in GCC.
+ So I took the total hack and added `#define _GLIBCXX_USE_NANOSLEEP`
+ to the top of the file and it compiled fine with the expected output
+ that there was 1 second pause between printing each member in the
+ vector<int>.
+ 
+ But in order to try and do it right, I need to figure out how to 
+ rebuild Yun-GCC with the `--enable-libstdcxx-time`
  
