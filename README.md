@@ -185,8 +185,7 @@ to build a cross compiler that lets me build for a target arch
 different than the host.  Since this is the first time I'm doing 
 this I will take it either way Mac->Deb or Mac<-Deb.
 
-Yun -
-	I've got a busy few days ahead learning to use the Yun.  Some
+  Some
 links of interst that I'm going to want to come back to:
 	http://forum.arduino.cc/index.php?topic=266549.0
 	http://tavendo.com/blog/post/arduino-yun-with-autobahn/
@@ -200,7 +199,9 @@ Steps:
 	3. Build libzmq - follow inst here http://zeromq.org/intro:get-the-software
 	
 ##27 May
-###Yun  
+###Yun
+I've got a busy few days ahead learning to use the Yun.
+
 I've got my Yun hooked up and I'm learning some quick lessons.  Some of this
 is documented on the forum and some of it assumes various levels of 
 experience with linux and OpenWRT.  So I'm going to record my path here from
@@ -240,6 +241,30 @@ Then I couldn't run `opkg update` because the clock is wrong and won't
 synch the right signature file.  Update the clock by going to 
 this [live clock](http://liveclock.net) and updating the Yun with
 `date --set <time>`.
+
+####Expanded File System
+In order to get the file system large enough to host GCC and Libzmq follow
+this advice from the [forum](http://www.arduino.cc/en/Tutorial/ExpandingYunDiskSpace).
+I set up a 32Gb, 3U class SD card.  The card class made it cost a little more
+but I'm hoping the performance increase makes it worth it.
+
+EDIT - after playing around with the Yun I locked it up and had to run through
+this whole configuration process again.  It was locking up so I took the SD 
+card and loaded as a drive on my Mac and used diskutils to erase the whole
+thing and then the script worked again.
+
+A few problems I had to troubleshoot on this.  Make sure you are connected to the 
+Yun over the usb port and not the netork address.  Otherwise it would not connect.
+
+Once the sketch is conneting I plugged in the ethernet cable to get an Internet
+connection so the sketch could load a few packages.
+
+####GCC
+Following the build advice on this [site](http://noblepepper.com/wp/blog/2014/10/22/gcc-g-on-an-arduino-yun/) leads to
+a working installation of gcc.
+
+Then the examples on this [forum post](http://forum.arduino.cc/index.php?topic=266549.0) are a good way to 
+get started with compiling C code on Yun.
 
 ##28 May
 ###Yun Continued
