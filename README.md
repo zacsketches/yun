@@ -242,6 +242,8 @@ synch the right signature file.  Update the clock by going to
 this [live clock](http://liveclock.net) and updating the Yun with
 `date --set <time>`.
 
+##28 May
+###Yun 
 ####Expanded File System
 In order to get the file system large enough to host GCC and Libzmq follow
 this advice from the [forum](http://www.arduino.cc/en/Tutorial/ExpandingYunDiskSpace).
@@ -265,17 +267,6 @@ a working installation of gcc.
 
 Then the examples on this [forum post](http://forum.arduino.cc/index.php?topic=266549.0) are a good way to 
 get started with compiling C code on Yun.
-
-##28 May
-###Yun Continued
-
-####Get GCC compiling on Yun
-This was a learning curve.  Had to expand the root file system with the e2fsprogs package.  I used the sketch from the arduino site, but the openwrt site and the forum have some good insight on the way to do it manually.
-Next I want to get this stuff working.
-
-	http://forum.arduino.cc/index.php?topic=266549.15
-
-	http://forum.arduino.cc/index.php?topic=266549.15
 
 ##29 May
 ###Yun Continued
