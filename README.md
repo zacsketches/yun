@@ -389,3 +389,54 @@ and found that `libstdcpp` was not installed, but when I tried
  
 ####LibZMQ
 I need to try this [link](https://walkerlindley.wordpress.com/2014/03/12/arduino-yun-and-git/) to get the source code onto the Yun.
+
+So I got the source, by downloading the zip file on my host 
+mac, and then `scp`'ing it over to the Yun.  
+But when I unzipped it there were all sorts of errors about ownership.
+```
+...Cannot change ownership to uid 501, gid 20: Operation not permitted
+```
+I found this [link](http://lime-technology.com/forum/index.php?PHPSESSID=216872a335b2a374d3ede9a4d7311597&topic=22709.msg202225#msg202225) with the recommendation to include
+specific calls to `--owner root --group root --no-same-owner`, and 
+this fixed the untarring problem.
+
+Now LibZMQ requires `autoconf`.
+But `autoconf` depends on `libtool` which depends on `GNU G4`.
+
+So I got the source for G4 at `http://ftp.gnu.org/gnu/m4/m4-latest.tar.gz`
+Ran `.\configure` successfully.  Then `make` and `make install`.  All
+worked and now I've got `M4` installed on the Yun from source.
+
+Next, I switched over to the libtool directory and again ran 
+`./configure`, `make` and `make install`.  Again it all worked so 
+now there is `libtool` available.
+
+Now I had to get the source for autoconf from 
+`wget http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz`
+But when I ran `./configure` it threw an error because perl was not
+found.
+
+I should be able to get perl via opkg.  Yep...found perl and installed
+it via `opkg install perl`.
+
+Then went back and ran`./configure` for autoconf again with success.
+But when I ran `make` it errore out with this:
+`Can't locate Data/Dumper.pm in @INC`
+
+So I found source for the module at:
+`http://search.cpan.org/CPAN/authors/id/S/SM/SMUELLER/Data-Dumper-2.154.tar.gz`
+and grabbed it with `wget ...`, and had to use the trick for 
+`--owner root --group root --no-same-owner` again to unpack it.
+And of course there's a slightly different syntax for installing
+perl.  Thankfully, I found this [link](http://help.directadmin.com/item.php?id=189) to help.
+
+...but it failed...this time I needed to find the `ExtUtils/MakeMaker.pm` module that has 
+source here `http://search.cpan.org/CPAN/authors/id/B/BI/BINGOS/ExtUtils-MakeMaker-7.04.tar.gz`
+
+..then that failed becaue it lacked `strict.pm`
+And that's when I realized something bigger was wrong here.  `strict` is 
+a fundamental pragma not an extension. So something was wrong with my perl
+package...thanks a lot package managers.  So I found the source for the whole
+perl install here: `http://www.cpan.org/src/5.0/perl-5.20.2.tar.gz` and I'm
+going to try and build it from source.
+
