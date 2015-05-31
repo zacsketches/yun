@@ -236,7 +236,10 @@ with the expected result:
 
 	`Linux Arduino 3.3.8 #1 Fri Nov 14 08:57:34 CET 2014 mips GNU/Linux`
 
-Then had to set the clock back to the right time with `date --set`.
+Then I couldn't run `opkg update` because the clock is wrong and won't 
+synch the right signature file.  Update the clock by going to 
+this [live clock](http://liveclock.net) and updating the Yun with
+`date --set <time>`.
 
 ##28 May
 ###Yun Continued
@@ -423,20 +426,18 @@ Then went back and ran`./configure` for autoconf again with success.
 But when I ran `make` it errore out with this:
 `Can't locate Data/Dumper.pm in @INC`
 
-So I found source for the module at:
-`http://search.cpan.org/CPAN/authors/id/S/SM/SMUELLER/Data-Dumper-2.154.tar.gz`
-and grabbed it with `wget ...`, and had to use the trick for 
-`--owner root --group root --no-same-owner` again to unpack it.
-And of course there's a slightly different syntax for installing
-perl.  Thankfully, I found this [link](http://help.directadmin.com/item.php?id=189) to help.
+Start by running `opkg install perlbase-base`.
+Run `opkg list | grep perlbase-` to see the list of perl modules available.
 
-...but it failed...this time I needed to find the `ExtUtils/MakeMaker.pm` module that has 
-source here `http://search.cpan.org/CPAN/authors/id/B/BI/BINGOS/ExtUtils-MakeMaker-7.04.tar.gz`
+And after some other dependency checking you also need Extutils and
+strict.pm.
+`opkg install perlbase-data`
+`opkg install perlbase-extutils`
 
-..then that failed becaue it lacked `strict.pm`
-And that's when I realized something bigger was wrong here.  `strict` is 
-a fundamental pragma not an extension. So something was wrong with my perl
-package...thanks a lot package managers.  So I found the source for the whole
-perl install here: `http://www.cpan.org/src/5.0/perl-5.20.2.tar.gz` and I'm
-going to try and build it from source.
+..then that failed because it lacked `strict.pm`
+
+But not I didn't see a module for strict; however,
+I found a link on the [forum](http://forum.arduino.cc/index.php?topic=220344.msg1772282#msg1772282) that explains
+how to get the source for strict.pm and install it directly into the right 
+spot.  Get the source [here](http://cpansearch.perl.org/src/SHAY/perl-5.20.2/lib/strict.pm)
 
