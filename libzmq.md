@@ -38,10 +38,15 @@ from Sonyyu to use the version of grep in his dropbox.  It's good
 enough to compile M4.  It it fails out on other things I can always go
 back and try the full version of grep that Noblepepper finishes up
 with.  Get Sonyyu's version at this link:
-
+```
 wget -O grep_2.14-1_ar71xx.ipk https://www.dropbox.com/s/a9zuwmh3mipj7jt/grep_2.14-1_ar71xx.ipk?dl=0 --no-check-certificate
+```
+Once I had installed the new grep, I was able to go back and run
+the `./configure`, `make` and `make install` on the M4 source.
 
-Once 
+Next was libtool.  I got the source for libtool from this link
+```
+
 
 Now LibZMQ requires `autoconf`.
 But `autoconf` depends on `libtool` which depends on `GNU G4`.
