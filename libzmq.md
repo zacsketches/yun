@@ -1,13 +1,26 @@
 ####LibZMQ
 This is the process I went through to get libzmq built on Arduino Yun.
+I've tried to explain in detail how I did it, but you may need to
+look up some commands or other stuff in the man pages on your host
+because those man pages are not stored on the Yun to conserve space.
 
-I was having trouble cloning the git repo for libzmq similar to the 
-challenge described [here](https://walkerlindley.wordpress.com/2014/03/12/arduino-yun-and-git/) to get the source code onto the Yun.
+In order to build libzmq on the Yun you must have already followed
+a few steps covered previously in my other docs. Specifically, you 
+must already expanded the file system (I am using a 32G class U3
+SD card) and you must have gotten yun-gcc working.  Additionally,  
+you will need to have updated your `/etc/hosts` file to to identify 
+the IP address for your youn so that commands like `ssh root@yun` 
+know the right IP to connect to.
+
+I was having trouble cloning the git repo for libzmq on the the Yun,
+similar to thechallenge described [here](https://walkerlindley.wordpress.com/2014/03/12/arduino-yun-and-git/).
 
 So I got the source, by downloading the zip file on my host 
-mac from this [github link](https://zeromq/libzmq/archive/master.zip) and then `scp`'ing it over to the Yun.  
+mac from this [github link](https://zeromq/libzmq/archive/master.zip) and then `scp`'ing it over to the Yun like this:
+`scp libzmq-master.zip root@yun:/mnt/sda1`
 
-But `unzip` is not installed by default so I used `opkg install unzip`
+But `unzip` is not installed by default on the yun to unpack the .zip
+file Ijust `scp`'d.  So I used `opkg install unzip`
 to remedy that little bump in the road.  After unzipping I noticed that
 the ./configure file had was exactly, `configure.ac`, an autoconf
 configure script.  You guessed it, `autoconf` is not an available package
@@ -66,23 +79,23 @@ http://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz
 ```
 Then the obvious steps to `wget` it, untar it and then
 `cd libtool-2.4.6` and run `./configure`, `make` and `make install`.
-
-
-Now LibZMQ requires `autoconf`.
-But `autoconf` depends on `libtool` which depends on `GNU G4`.
-
-So I got the source for G4 at `http://ftp.gnu.org/gnu/m4/m4-latest.tar.gz`
-Ran `.\configure` successfully.  Then `make` and `make install`.  All
-worked and now I've got `M4` installed on the Yun from source.
-
-Next, I switched over to the libtool directory and again ran 
-`./configure`, `make` and `make install`.  Again it all worked so 
-now there is `libtool` available.
+Then after a successful installation you get the rewarding result:
+`root@Arduino# libtool --version`
+`libtool (GNU libtool) 2.4.6`
 
 Now I had to get the source for autoconf from 
 `wget http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz`
-But when I ran `./configure` it threw an error because perl was not
-found.
+Untar it with the now standard command we've been using:
+`tar -xvf autoconf-latest.tar.gz --owner root --group root --no-same-owner`
+But when I ran `./configure` it threw a bunch of errors because 
+various perl modules were not found.
+
+Then I had to learn about how perl is managed on the Yun.  There
+is the obvious package you need to install:
+`opkg install perl`
+
+But oh..wait..there is so much more.  I've probably run the configure
+and make 
 
 I should be able to get perl via opkg.  Yep...found perl and installed
 it via `opkg install perl`.
