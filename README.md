@@ -457,3 +457,17 @@ I found a link on the [forum](http://forum.arduino.cc/index.php?topic=220344.msg
 how to get the source for strict.pm and install it directly into the right 
 spot.  Get the source [here](http://cpansearch.perl.org/src/SHAY/perl-5.20.2/lib/strict.pm)
 
+##2-3 Jun
+###Unix admin
+I liked the awk class I did on Lynda.com so much that I signe up for 
+another class on Bash scripting.  The author uses an Ubuntu virtual machine
+for the class hosted on DigitalOcean.com.  So I wanted to try it out
+too.  I set up a basic Ubuntu machine at 162.243.147.239 and can access it via
+ssh at root with standard passwords.
+
+I also learned about the `tree -C` command to get better visibility into
+a directory structure.
+
+On Wednesday morning I learned about the `bc -l` command to get a 
+*basic calculator*.  Example usage is `echo "1/3" | bc -l` to get the
+decimal result of that calculation.
