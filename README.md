@@ -486,5 +486,9 @@ Once the ssh deaemon gets turned on there are a couple pieces of info to
 gather from the host system before you try and login.  The first is the
 case-sensitive username.  Type `whoami` at the command prompt to get the
 exact user name.  Then type `ifconfig` and make note of the ip address.
-Use my script `ip` in the this source directory for a quick command
+Use my script `ip.sh` in the this source directory for a quick command
 to just print the ip address to the terminal.
+
+Then from the remote terminal you can log in via `ssh`, `sftp`, or for 
+a quick file copy `scp`.  For example, `sftp <user>@<ip>` will get you
+logged into the remote machine to share files back and forth.
