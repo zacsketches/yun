@@ -65,11 +65,34 @@ The next problem I had was connecting to the router.  Even when
 it was in its wait state I couldn't ping it, nor could I get
 tftp to connect.  So I had to change a few of the dhcp settings
 
-add this
-http://wiki.openwrt.org/doc/howto/generic.flashing.tftp
+See page 122 of the book.  Summarized here with  my mods to get
+it working.  Create a record in `/etc/init.d/` called
+`S60dnsmasq`.  This record is short and pionts to the config file
+and controls DNS and DHCP.
+```
+#!/bin/sh
+dnsmasq -C /etc/dnsmasq.conf
+```
+Then I had to restart the dnsmasq with `killall dnsmasq` followed by
+running the new script `/etc/init.d/S60dnsmasq`
 
-add this
-http://downloads.openwrt.org/kamikaze/8.09.2/brcm-2.4/openwrt-brcm-2.4-squashfs.trx
+Once this was up and running I could then run an ethernet cable 
+from my mac mini to the WRT and it would serve a DHCP ip address to 
+the mac and I could ping it.
+
+Then I plugged the WRT wan port into my DOCSIS xfinity modem so 
+that the switch would keep both link layers alive.  Then I could ping
+from from the wrt console -> to the xfinity modem **and** from to
+wrt console -> mac.
+
+I had to delete any `arp` records related to the old setup on my mac
+which were blocking comms with tftp.  With that flushed I could
+reboot on the wrt_console and then initiate tftp from the mac.
+
+I also wrote a little script to automate the tftp process and requires
+less typing.  See `wrt_tftp.sh` in the roote of this repo.
+
+####Chapter 3, Using OpenWRT
 
 
 
