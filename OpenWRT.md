@@ -65,5 +65,12 @@ The next problem I had was connecting to the router.  Even when
 it was in its wait state I couldn't ping it, nor could I get
 tftp to connect.  So I had to change a few of the dhcp settings
 
+add this
+http://wiki.openwrt.org/doc/howto/generic.flashing.tftp
+
+add this
+http://downloads.openwrt.org/kamikaze/8.09.2/brcm-2.4/openwrt-brcm-2.4-squashfs.trx
+
+
 
 
