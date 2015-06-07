@@ -471,3 +471,20 @@ a directory structure.
 On Wednesday morning I learned about the `bc -l` command to get a 
 *basic calculator*.  Example usage is `echo "1/3" | bc -l` to get the
 decimal result of that calculation.
+
+##7 Jun
+###Unix admin
+Today I wanted to `sftp` and/or `scp` from on computer on my home network to
+another on the same subnet.
+
+I knew how to enable sharing from the system preferences but wanted to be
+able to do it from the command line in OS X.  Turns out it is 
+as clear as can be.
+`sudo systemsetup -setremotelogin on`
+
+Once the ssh deaemon gets turned on there are a couple pieces of info to
+gather from the host system before you try and login.  The first is the
+case-sensitive username.  Type `whoami` at the command prompt to get the
+exact user name.  Then type `ifconfig` and make note of the ip address.
+Use my script `ip` in the this source directory for a quick command
+to just print the ip address to the terminal.
