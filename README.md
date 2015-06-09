@@ -492,3 +492,23 @@ to just print the ip address to the terminal.
 Then from the remote terminal you can log in via `ssh`, `sftp`, or for 
 a quick file copy `scp`.  For example, `sftp <user>@<ip>` will get you
 logged into the remote machine to share files back and forth.
+
+##8 Jun
+###Mac/Unix admin
+Learned today that apple uses a program called `defaults` to control
+preferences to system apps.  Many of these preferences go beyond what
+is available in the preferences pane in the app itself.  For example,
+today I wanted to display hidden files in the Finder.  I searched for
+15 minutes thinking that it had to be somewhere in the GUI options...
+####NO!!
+Apple does not give that option.  So I googled it and found out about the
+defaults program.  Check the man page `man defaults` for a pretty good
+explanation.  Then by issueing this command set at a terminal you can
+add the preference and kill the Finder process.  
+```
+defaults write com.apple.finder AppleShowAllFiles YES
+killall Finder
+```
+The system core processes daemon will relaunch the finder process so you 
+can give it a minute to reload and click on a finder window to see the results.
+
