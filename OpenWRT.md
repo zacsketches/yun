@@ -36,6 +36,9 @@ on the PCB inside the router.
 
 ## TODO: add photos and description of the hardware hack
 
+Once the cable is built connect to the root console via the
+`screen </dev/name> 115200`
+
 #####`nvram` 
 Once I regained root access I wanted to start learning about the
 Linux environment in the router.  `nvram` is that start of that journey.
